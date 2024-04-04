@@ -2,37 +2,46 @@ import { Navbar, Container, Nav } from 'react-bootstrap';
 import './App.css';
 import { useState } from 'react';
 import data from './data';
+import { Routes, Route, Link, useNavigate, Outlet} from 'react-router-dom';
+import Detail from './routes/Detail';
 
 function App() {
 
   let [shoes] = useState(data)
+  let navigate = useNavigate();
 
   return (
-    <div className="App">      
+    <div className="App">            
       <Navbar bg="light" data-bs-theme="light">
         <Container>
-          <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+          <Navbar.Brand href="/">Navbar</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>            
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link onClick={()=>{ navigate('/detail') }}>Detail</Nav.Link>            
           </Nav>
         </Container>
       </Navbar>
 
-      <div className='main-bg'></div>
-
-      <div className='container'>
-        <div className='row'>          
-          {
-            shoes.map((a, i)=>{
-              return(
-                <Card shoes={shoes[i]} i={i}></Card>
-              )             
-            })
-          }          
-        </div>
-      </div>
-
+      <Routes>
+        <Route path='/' element={
+        <>
+          <div className='main-bg'></div>
+          <div className='container'>
+            <div className='row'>          
+              {
+                shoes.map((a, i)=>{
+                  return(
+                    <Card shoes={shoes[i]} i={i}></Card>
+                  )             
+                })
+              }          
+            </div>
+          </div>
+        </>
+        }/>
+        <Route path='/detail/:id' element={<Detail shoes={shoes}/>}/>        
+        <Route path='*' element={<div>없는 페이지 입니다</div>}/>        
+      </Routes>
     </div>
   );
 }
