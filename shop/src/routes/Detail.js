@@ -8,16 +8,24 @@ function Detail(props){
   let prd = props.shoes.find(x => x.id == id);  
   let [alert , setAlert] = useState(true)
   let [tab, setTab] = useState(0)
+  let [fade2, setFade2] = useState('')
 
   useEffect(()=>{
     let timer = setTimeout(()=>{ setAlert(false) }, 2000)
     return ()=>{
       clearTimeout(timer)
     }
-  }, []) 
+  }, [])
+  
+  useEffect(()=>{
+    setTimeout(()=>{ setFade2('end') }, 100)
+    return ()=>{
+      setFade2('')
+    }
+  },[])
 
   return(
-    <div className='container'>
+    <div className={'container start ' + fade2}>
       {
         alert == true
         ? <div className='alert alert-warning'>
@@ -66,6 +74,18 @@ function TabContent(props){
 }
 */
 function TabContent({tab}){
-  return [<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][tab]
+
+  let [fade, setFade] = useState('')
+
+  useEffect(()=>{
+    setTimeout(()=>{ setFade('end') }, 100)
+    return ()=>{
+      setFade('')
+    }
+  },[tab])
+
+  return (<div className={'start ' + fade}>
+    {[<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][tab]}
+  </div>)
 }
 export default Detail;
