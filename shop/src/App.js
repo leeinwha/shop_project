@@ -20,6 +20,7 @@ function App() {
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link onClick={()=>{ navigate('/detail/0') }}>Detail</Nav.Link>            
+            <Nav.Link onClick={()=>{ navigate('/cart') }}>cart</Nav.Link>            
           </Nav>
         </Container>
       </Navbar>
@@ -30,13 +31,11 @@ function App() {
           <div className='main-bg'></div>
           <div className='container'>
             <div className='row'>          
-              {
-                shoes.map((a, i)=>{
+              { shoes.map((a, i)=>{
                   return(
                     <Card shoes={shoes[i]} i={i} key={i}></Card>
                   )             
-                })
-              }          
+                }) }          
             </div>
           </div>
           <button onClick={()=>{
@@ -45,7 +44,7 @@ function App() {
               let copy = [...shoes, ...result.data]
               setShoes(copy);
               })
-          }}>더보기</button>
+          }} className='btn_more'>더보기</button>
         </>
         }/>
         <Route path='/detail/:id' element={<Detail shoes={shoes}/>}/>
