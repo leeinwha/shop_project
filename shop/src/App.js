@@ -1,6 +1,6 @@
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import data from './data';
 import { Routes, Route, Link, useNavigate, Outlet} from 'react-router-dom';
 import Detail from './routes/Detail';
@@ -8,6 +8,10 @@ import axios from 'axios';
 import Cart from './routes/Cart'
 
 function App() {
+
+  useEffect(()=>{
+    localStorage.setItem('watched', JSON.stringify([]))
+  },[])
 
   let [shoes, setShoes] = useState(data)
   let navigate = useNavigate();

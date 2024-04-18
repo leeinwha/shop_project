@@ -10,8 +10,7 @@ function Cart(){
 
   return(
     <div>
-      <h3 className='cart_title'>{state.user.name} {state.user.age} 의 장바구니</h3>
-      <button onClick={()=>{ dispatch(increase(10)) }}>버튼</button>
+      <h3 className='cart_title'>{state.user.name}의 장바구니</h3>      
       <Table>
         <thead>
           <tr>

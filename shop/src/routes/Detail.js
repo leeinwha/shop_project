@@ -15,6 +15,15 @@ function Detail(props){
   let dispatch = useDispatch()
 
   useEffect(()=>{
+    let pd = localStorage.getItem('watched')
+    pd = JSON.parse(pd)
+    pd.push(prd.id)
+    pd = new Set(pd)
+    pd = Array.from(pd)
+    localStorage.setItem('watched', JSON.stringify(pd))
+  }, [])
+
+  useEffect(()=>{
     let timer = setTimeout(()=>{ setAlert(false) }, 2000)
     return ()=>{
       clearTimeout(timer)
